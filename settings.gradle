@@ -1,0 +1,5 @@
+rootProject.name = 'RS09'
+include 'Client'
+include 'Management-Server'
+include 'Server'
+include 'File-Server'
