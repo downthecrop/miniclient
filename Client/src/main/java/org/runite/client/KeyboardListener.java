@@ -57,10 +57,11 @@ final class KeyboardListener implements KeyListener, FocusListener {
          }
    }
 
+boolean capitalize = false;
 
    public final synchronized void keyPressed(KeyEvent var1) {
       try {
-//         System.out.println("Key code: " + var1.getKeyCode());
+         System.out.println("Key code: " + var1.getKeyCode());
          switch (var1.getKeyCode())
          {
             case 16:
@@ -70,12 +71,8 @@ final class KeyboardListener implements KeyListener, FocusListener {
                MouseWheel.ctrlDown = true;
                break;
             case 192:
-               DeveloperConsole.INSTANCE.toggle();
+               capitalize = true;
                return;
-         }
-         if (DeveloperConsole.INSTANCE.getOpen()) {
-            DeveloperConsole.INSTANCE.handleKeyDown(var1);
-            return;
          }
 
          if(null != TextureOperation33.aClass148_3049) {
@@ -166,6 +163,16 @@ final class KeyboardListener implements KeyListener, FocusListener {
       if (DeveloperConsole.INSTANCE.getOpen()) {
          DeveloperConsole.INSTANCE.handleKeyPressed(var1);
          return;
+      }
+      if(var1.getKeyChar() == '`'){
+         return;
+      }
+      if(capitalize){
+         System.out.println("Replacing"+var1.getKeyCode());
+         System.out.println("Replacing"+var1.getKeyChar());
+         var1.setKeyChar(Character.toUpperCase(var1.getKeyChar()));
+         System.out.println("with"+var1.getKeyChar());
+         capitalize = false;
       }
       if(var1.isAltDown()){
          if(var1.getKeyChar()=='n'){
