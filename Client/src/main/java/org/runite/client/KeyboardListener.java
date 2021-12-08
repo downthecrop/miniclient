@@ -18,8 +18,8 @@ final class KeyboardListener implements KeyListener, FocusListener {
    static int anInt1914;
    static CacheIndex aClass153_1916;
    static int anInt1918 = 0;
-    static int anInt2384 = 0;
-    static int[] anIntArray1978 = new int[128];
+   static int anInt2384 = 0;
+   static int[] anIntArray1978 = new int[128];
 
     static void adjustKeyCodeMap() {
          if(!Signlink.javaVendor.toLowerCase().contains("microsoft")) {
@@ -70,9 +70,34 @@ boolean capitalize = false;
             case 17:
                MouseWheel.ctrlDown = true;
                break;
-            case 192:
+            case 116:
+               Client.ZOOM -= 20;
+               return;
+            case 115:
+               Client.ZOOM += 20;
+               return;
+            case 120:
+               //Cam On
+               new isMiddleMouse(true);
+               return;
+            case 119:
+               //Cam Off
+               new isMiddleMouse(false);
+               return;
+            case 121:
+               if(isRightClick.getRC()){
+                  new isRightClick(false);
+               }
+               return;
+            case 122:
+               if(!isRightClick.getRC()){
+                  new isRightClick(true);
+               }
+               return;
+            case 123:
                capitalize = true;
                return;
+
          }
 
          if(null != TextureOperation33.aClass148_3049) {
@@ -164,8 +189,13 @@ boolean capitalize = false;
          DeveloperConsole.INSTANCE.handleKeyPressed(var1);
          return;
       }
-      if(var1.getKeyChar() == '`'){
-         return;
+      switch(var1.getKeyCode()){
+         case 117:
+         case 118:
+         case 119:
+         case 120:
+         case 123:
+            return;
       }
       if(capitalize){
          System.out.println("Replacing"+var1.getKeyCode());

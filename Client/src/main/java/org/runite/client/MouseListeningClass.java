@@ -2,6 +2,7 @@ package org.runite.client;
 
 import javax.swing.*;
 import java.awt.event.*;
+import org.runite.client.isRightClick;
 
 public final class MouseListeningClass implements MouseListener, MouseMotionListener, FocusListener {
     static volatile int anInt1340 = -1;
@@ -16,7 +17,18 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
     static int anInt1926;
 
     public final synchronized void mouseMoved(MouseEvent var1) {
-        System.out.println(var1);
+        int x = var1.getX();
+        int y = var1.getY();
+        if(isMiddleMouse.getRC()){
+            int accelX = this.mouseWheelX - x;
+            int accelY = this.mouseWheelY - y;
+            this.mouseWheelX = var1.getX();
+            this.mouseWheelY = var1.getY();
+            GraphicDefinition.CAMERA_DIRECTION += accelX * 2;
+            Unsorted.anInt2309 -= (accelY << 1);
+            return;
+        }
+
         try {
             if (Unsorted.aClass149_4047 != null) {
                 Unsorted.anInt4045 = 0;
@@ -118,6 +130,8 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
     }
 
     public final void mouseClicked(MouseEvent var1) {
+        if(isRightClick.getRC())
+            new isRightClick(false);
         try {
             if (var1.isPopupTrigger()) {
                 var1.consume();
@@ -155,13 +169,15 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
                 RenderAnimationDefinition.anInt362 = var1.getX();
                 TextureOperation14.anInt3389 = var1.getY();
                 Class140_Sub6.aLong2926 = TimeUtils.time();
-                if (var1.getButton() == MouseEvent.BUTTON3) // SwingUtilities.isRightMouseButton(var1)
+                if (SwingUtilities.isRightMouseButton(var1) ||
+                isRightClick.getRC()) // SwingUtilities.isRightMouseButton(var1)
                 {
                     Class140_Sub3.anInt2743 = 2;
                     GraphicDefinition.anInt549 = 2;
                 } else if (SwingUtilities.isLeftMouseButton(var1)) {
                     Class140_Sub3.anInt2743 = 1;
                     GraphicDefinition.anInt549 = 1;
+                    System.out.println("YES I CLICKED");
                 }
             }
             if (var1.isPopupTrigger()) {

@@ -138,6 +138,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
             var2.addMouseListener(ml);
             canvas.addMouseListener(ml);
             addMouseListener(ml);
+            addMouseMotionListener(ml);
+            canvas.addMouseMotionListener(ml);
             hasWindowFocus = true;
             TextureOperation30.fullRedraw = true;
             TextureOperation26.aBoolean3078 = true;
@@ -432,12 +434,16 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
             frame.addWindowListener(this);
             frame.addMouseListener(ml);
             addMouseListener(ml);
-            frame.setVisible(true);
+            frame.setUndecorated(true);
             frame.toFront();
+            frame.pack();
+            frame.setVisible(true);
+
             Insets insets = frame.getInsets();
             frame.setSize(insets.left + Unsorted.frameWidth + insets.right, insets.top + Class70.frameHeight + insets.bottom);
             TextureOperation30.signlink = Class38.gameSignlink = new Signlink(null, 32 + TextureOperation20.paramModeWhat, "runescape", 29);
             Class64 var10 = Class38.gameSignlink.startThread(1, this);
+
 
             while (0 == Objects.requireNonNull(var10).anInt978) {
                 TimeUtils.sleep(10L);
