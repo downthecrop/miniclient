@@ -57,6 +57,60 @@ final class KeyboardListener implements KeyListener, FocusListener {
          }
    }
 
+public char getSpecial(char c){
+       switch(c){
+          case '1':
+             return '!';
+          case '2':
+             return '@';
+          case '3':
+             return '#';
+          case '4':
+             return '$';
+          case '5':
+             return '%';
+          case '6':
+             return '^';
+          case '7':
+             return '&';
+          case '8':
+             return '*';
+          case '9':
+             return '(';
+          case '0':
+             return ')';
+          case '-':
+             return '_';
+          case '=':
+             return '+';
+          case '[':
+             return '{';
+          case ']':
+             return '}';
+          case ';':
+             return ':';
+          case '\'':
+             return '"';
+          case ',':
+             return '<';
+          case '.':
+             return '>';
+          case '/':
+             return '?';
+          case '\\':
+             return '|';
+       }
+   return '~';
+}
+
+public boolean isSpecial(char c){
+   String specialChars = "/*!@#$%^&*()\"{}_[+=-_]\'|\\?/<>,.";
+       if(Character.isDigit(c) || specialChars.contains(""+c)){
+           return true;
+       }
+    return false;
+}
+
 boolean capitalize = false;
 
    public final synchronized void keyPressed(KeyEvent var1) {
@@ -198,11 +252,15 @@ boolean capitalize = false;
             return;
       }
       if(capitalize){
+         capitalize = false;
          System.out.println("Replacing"+var1.getKeyCode());
          System.out.println("Replacing"+var1.getKeyChar());
-         var1.setKeyChar(Character.toUpperCase(var1.getKeyChar()));
+         if(isSpecial(var1.getKeyChar())){
+            var1.setKeyChar(getSpecial(var1.getKeyChar()));
+         } else {
+            var1.setKeyChar(Character.toUpperCase(var1.getKeyChar()));
+         }
          System.out.println("with"+var1.getKeyChar());
-         capitalize = false;
       }
       if(var1.isAltDown()){
          if(var1.getKeyChar()=='n'){
