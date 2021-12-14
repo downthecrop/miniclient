@@ -104,7 +104,7 @@ public char getSpecial(char c){
 }
 
 public boolean isSpecial(char c){
-   String specialChars = "/*!@#$%^&*()\"{}_[+=-_]\'|\\?/<>,.";
+   String specialChars = "/*!@#$%^&*:();\"{}_[+=-_]\'|\\?/<>,.";
        if(Character.isDigit(c) || specialChars.contains(""+c)){
            return true;
        }
@@ -157,23 +157,6 @@ boolean capitalize = false;
          if(null != TextureOperation33.aClass148_3049) {
             TextureOperation29.anInt3398 = 0;
             int var2 = var1.getKeyCode();
-//            switch(var2) {
-//               case 112://f1
-//                  var2 = 115;
-//                  break;
-//               case 113://f2
-//                  var2 = 116;
-//                  break;
-//               case 114://f3
-//                  var2 = 117;
-//                  break;
-//               case 115://f4
-//                  var2 = 118;
-//                  break;
-//               case 116://f5
-//                  var2 = 112;
-//                  break;
-//            }
             if(0 <= var2 && KEY_CODE_MAP.length > var2) {
                var2 = KEY_CODE_MAP[var2];
                // System.out.println(var2);
