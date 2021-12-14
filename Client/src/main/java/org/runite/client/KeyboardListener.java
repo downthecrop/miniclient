@@ -134,6 +134,12 @@ boolean capitalize = false;
                //Cam On
                new isMiddleMouse(true);
                return;
+            case 118:
+               new isHeldPress(true);
+               return;
+            case 117:
+               new isHeldPress(false);
+               return;
             case 119:
                //Cam Off
                new isMiddleMouse(false);

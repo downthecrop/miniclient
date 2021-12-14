@@ -29,6 +29,11 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
             return;
         }
 
+        if(isHeldPress.getRC()){
+            Class140_Sub3.anInt2743 = 1;
+            GraphicDefinition.anInt549 = 1;
+        }
+
         try {
             if (Unsorted.aClass149_4047 != null) {
                 Unsorted.anInt4045 = 0;
@@ -177,7 +182,7 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
                 } else if (SwingUtilities.isLeftMouseButton(var1)) {
                     Class140_Sub3.anInt2743 = 1;
                     GraphicDefinition.anInt549 = 1;
-                    System.out.println("YES I CLICKED");
+                    //System.out.println("YES I CLICKED");
                 }
             }
             if (var1.isPopupTrigger()) {
