@@ -24,12 +24,12 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
             int accelY = this.mouseWheelY - y;
             this.mouseWheelX = var1.getX();
             this.mouseWheelY = var1.getY();
-            GraphicDefinition.CAMERA_DIRECTION += accelX * 2;
+            GraphicDefinition.CAMERA_DIRECTION += accelX * 3;
             Unsorted.anInt2309 -= (accelY << 1);
             return;
         }
 
-        if(isHeldPress.getRC()){
+        if(isHeldPress.getRC() && Class140_Sub3.anInt2743 != 1){
             Class140_Sub3.anInt2743 = 1;
             GraphicDefinition.anInt549 = 1;
         }
