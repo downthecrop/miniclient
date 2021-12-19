@@ -1,11 +1,12 @@
 package org.runite.client;
 
 public class isRightClick {
-    private static boolean rcState = false;
-    public static synchronized boolean getRC(){
-        return rcState;
+    private static boolean state = false;
+    public static synchronized boolean getState(){
+        return state;
     }
     public isRightClick(boolean state){
-        rcState = state;
+        state = state;
     }
 }
+

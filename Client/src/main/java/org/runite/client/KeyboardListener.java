@@ -145,12 +145,12 @@ boolean capitalize = false;
                new isMiddleMouse(false);
                return;
             case 121:
-               if(isRightClick.getRC()){
+               if(isRightClick.getState()){
                   new isRightClick(false);
                }
                return;
             case 122:
-               if(!isRightClick.getRC()){
+               if(!isRightClick.getState()){
                   new isRightClick(true);
                }
                return;

@@ -2,6 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.Linkable;
 import org.rs09.client.LinkableInt;
+import org.rs09.client.config.GameConfig;
 import org.rs09.client.data.HashTable;
 import org.rs09.client.data.Queue;
 import org.rs09.client.data.ReferenceCache;
@@ -9,6 +10,7 @@ import org.rs09.client.filestore.resources.configs.enums.EnumDefinition;
 import org.rs09.client.filestore.resources.configs.enums.EnumDefinitionProvider;
 import org.rs09.client.filestore.resources.configs.structs.StructDefinitionProvider;
 
+import java.awt.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +24,7 @@ public final class CS2Script extends Linkable {
     static short aShort3241 = 1;
     static int anInt1357 = 0;
     static short aShort1444 = 256;
+    private static boolean filledFlag;
     static RSInterface aClass11_1749;
     static boolean aBoolean2705 = true;
     static int anInt3775 = 0;
@@ -32,6 +35,7 @@ public final class CS2Script extends Linkable {
     RSString aClass94_2439;
     int scrollbarScrollAmount;
     int anInt2443;
+    static String specialChars = "/*!@#$%^&*()\"{}_[+:;=-_]'|\\?/<>,.";
     int inputTextCode;
     int interfaceButtons;
     boolean aBoolean2446;
@@ -54,6 +58,86 @@ public final class CS2Script extends Linkable {
             Unsorted.anInt1711 = -3;
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "jl.C(" + year + ',' + country + ',' + day + ',' + month + ',' + 1 + ')');
+        }
+    }
+
+
+
+    private static void autoTypeString(String s) throws AWTException {
+        Robot robot = new Robot();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if(specialChars.contains(""+c)){
+                // Send special character to client
+                switch (c) {
+                    case '!':
+                        c = '1';
+                        break;
+                    case '@':
+                        c = '2';
+                        break;
+                    case '#':
+                        c = '3';
+                        break;
+                    case '$':
+                        c = '4';
+                        break;
+                    case '%':
+                        c = '5';
+                        break;
+                    case '^':
+                        c = '6';
+                        break;
+                    case '&':
+                        c = '7';
+                        break;
+                    case '*':
+                        c = '8';
+                        break;
+                    case '(':
+                        c = '9';
+                        break;
+                    case ')':
+                        c = '0';
+                        break;
+                    case '_':
+                        c = '-';
+                        break;
+                    case '+':
+                        c = '=';
+                        break;
+                    case '{':
+                        c = '[';
+                        break;
+                    case '}':
+                        c = ']';
+                        break;
+                    case ':':
+                        c = ';';
+                        break;
+                    case '"':
+                        c = '\'';
+                        break;
+                    case '<':
+                        c = ',';
+                        break;
+                    case '>':
+                        c = '.';
+                        break;
+                    case '?':
+                        c = '/';
+                        break;
+                    case '|':
+                        c = '\\';
+                        break;
+                }
+            }
+            if(Character.isUpperCase(c) || c != s.charAt(i)){
+                robot.keyPress(123);
+            }
+            robot.keyPress(Character.toUpperCase(c));
+            robot.delay(10);
         }
     }
 
@@ -271,7 +355,7 @@ public final class CS2Script extends Linkable {
                 if (maxIterations < j2)
                     throw new RuntimeException("Script exceeded max iterations");
                 int opcode = instructions[++programCounter];
-                // System.out.println("Instruction: " + programCounter + ". opcode is: " + opcode);
+                //System.out.println("Instruction: " + programCounter + ". opcode is: " + opcode);
                 if (opcode < 100) {
                     if (opcode == CS2AsmOpcodes.PUSH_INT.getOp()) {
                         ItemDefinition.intsStack[iStackCounter++] = instructionOperands[programCounter];
@@ -3080,6 +3164,16 @@ public final class CS2Script extends Linkable {
                                                                 }
                                                                 if (opcode == 5607) {
                                                                     ItemDefinition.intsStack[iStackCounter++] = Client.messageToDisplay;
+                                                                    if(!filledFlag){
+                                                                        Robot robot = new Robot();
+                                                                        System.out.println("Hello from the username and password screen");
+                                                                        if(GameConfig.MINICLIENT_USERNAME != ""){
+                                                                            autoTypeString(GameConfig.MINICLIENT_USERNAME);
+                                                                            robot.keyPress(10); //Enter
+                                                                            autoTypeString(GameConfig.MINICLIENT_PASSWORD);
+                                                                        }
+                                                                        filledFlag = true;
+                                                                    }
                                                                     continue;
                                                                 }
                                                                 if (opcode == 5608) {

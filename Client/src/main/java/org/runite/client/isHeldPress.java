@@ -1,11 +1,11 @@
 package org.runite.client;
 
 public class isHeldPress {
-    private static boolean rcState = false;
-    public static synchronized boolean getRC(){
-        return rcState;
+    private static boolean state = false;
+    public static synchronized boolean getState(){
+        return state;
     }
     public isHeldPress(boolean state){
-        rcState = state;
+        isHeldPress.state = state;
     }
 }

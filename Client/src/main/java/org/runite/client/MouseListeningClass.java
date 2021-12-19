@@ -2,7 +2,6 @@ package org.runite.client;
 
 import javax.swing.*;
 import java.awt.event.*;
-import org.runite.client.isRightClick;
 
 public final class MouseListeningClass implements MouseListener, MouseMotionListener, FocusListener {
     static volatile int anInt1340 = -1;
@@ -19,7 +18,7 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
     public final synchronized void mouseMoved(MouseEvent var1) {
         int x = var1.getX();
         int y = var1.getY();
-        if(isMiddleMouse.getRC()){
+        if(isMiddleMouse.getState()){
             int accelX = this.mouseWheelX - x;
             int accelY = this.mouseWheelY - y;
             this.mouseWheelX = var1.getX();
@@ -29,9 +28,17 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
             return;
         }
 
-        if(isHeldPress.getRC() && Class140_Sub3.anInt2743 != 1){
+        // Mouse Dragging
+        if(isHeldPress.getState() && Class140_Sub3.anInt2743 != 1){
+            Unsorted.anInt4045 = 0;
+            RenderAnimationDefinition.anInt362 = var1.getX();
+            TextureOperation14.anInt3389 = var1.getY();
+            Class140_Sub6.aLong2926 = TimeUtils.time();
             Class140_Sub3.anInt2743 = 1;
             GraphicDefinition.anInt549 = 1;
+            Unsorted.anInt4045 = 0;
+            Class3_Sub21.anInt2493 = var1.getX();
+            anInt1340 = var1.getY();
         }
 
         try {
@@ -135,8 +142,15 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
     }
 
     public final void mouseClicked(MouseEvent var1) {
-        if(isRightClick.getRC())
+        if(isRightClick.getState())
             new isRightClick(false);
+        if(isHeldPress.getState()){
+            new isHeldPress(false);
+            Unsorted.anInt4045 = 0;
+            GraphicDefinition.anInt549 = 0;
+            return;
+        }
+
         try {
             if (var1.isPopupTrigger()) {
                 var1.consume();
@@ -175,7 +189,7 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
                 TextureOperation14.anInt3389 = var1.getY();
                 Class140_Sub6.aLong2926 = TimeUtils.time();
                 if (SwingUtilities.isRightMouseButton(var1) ||
-                isRightClick.getRC()) // SwingUtilities.isRightMouseButton(var1)
+                isRightClick.getState()) // SwingUtilities.isRightMouseButton(var1)
                 {
                     Class140_Sub3.anInt2743 = 2;
                     GraphicDefinition.anInt549 = 2;

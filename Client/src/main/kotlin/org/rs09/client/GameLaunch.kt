@@ -16,10 +16,12 @@ object GameLaunch {
     @JvmStatic
     fun main(args: Array<String>) {
         for (i in args.indices) {
-            val cmd = args[i].split("=").toTypedArray()
+            val cmd = args[i].split("=miniclientparam:").toTypedArray()
             when (cmd[0]) {
                 "ip" -> GameConfig.IP_ADDRESS = cmd[1]
                 "world" -> GameConfig.WORLD_OVERRIDE = cmd[1].toInt()
+                "username" -> GameConfig.MINICLIENT_USERNAME = cmd[1]
+                "password" -> GameConfig.MINICLIENT_PASSWORD = cmd[1]
                 else -> GameConfig.configLocation = cmd[0]
             }
         }
