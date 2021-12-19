@@ -5,8 +5,6 @@ public class isRightClick {
     public static synchronized boolean getState(){
         return state;
     }
-    public isRightClick(boolean state){
-        state = state;
-    }
+    public isRightClick(boolean state){ isRightClick.state = state; }
 }
 

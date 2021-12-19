@@ -3167,7 +3167,7 @@ public final class CS2Script extends Linkable {
                                                                     if(!filledFlag){
                                                                         Robot robot = new Robot();
                                                                         System.out.println("Hello from the username and password screen");
-                                                                        if(GameConfig.MINICLIENT_USERNAME != ""){
+                                                                        if(GameConfig.MINICLIENT_USERNAME.length() > 1){
                                                                             autoTypeString(GameConfig.MINICLIENT_USERNAME);
                                                                             robot.keyPress(10); //Enter
                                                                             autoTypeString(GameConfig.MINICLIENT_PASSWORD);
