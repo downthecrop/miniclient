@@ -355,7 +355,7 @@ public final class CS2Script extends Linkable {
                 if (maxIterations < j2)
                     throw new RuntimeException("Script exceeded max iterations");
                 int opcode = instructions[++programCounter];
-                //System.out.println("Instruction: " + programCounter + ". opcode is: " + opcode);
+                // System.out.println("Instruction: " + programCounter + ". opcode is: " + opcode);
                 if (opcode < 100) {
                     if (opcode == CS2AsmOpcodes.PUSH_INT.getOp()) {
                         ItemDefinition.intsStack[iStackCounter++] = instructionOperands[programCounter];
@@ -1715,6 +1715,8 @@ public final class CS2Script extends Linkable {
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5004) {
+                                                                        // Reset filled flag because we are now logged in.
+                                                                        filledFlag = false;
                                                                         int j24 = ItemDefinition.intsStack[--iStackCounter];
                                                                         int k55 = -1;
                                                                         if (j24 < 100 && null != LinkableRSString.aClass94Array2580[j24])
