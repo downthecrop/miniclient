@@ -104,7 +104,7 @@ public char getSpecial(char c){
 }
 
 public boolean isSpecial(char c){
-   String specialChars = "/*!@#$%^&*:();\"{}_[+=-_]\'|\\?/<>,.";
+   String specialChars = "/*!@#$%^&*:();\"{}_[+=-_]'|\\?/<>,.";
        if(Character.isDigit(c) || specialChars.contains(""+c)){
            return true;
        }
@@ -113,11 +113,13 @@ public boolean isSpecial(char c){
 
 boolean capitalize = false;
 
-   public final synchronized void keyPressed(KeyEvent var1) {
+   public final synchronized void keyPressed(KeyEvent e) {
       try {
-         System.out.println("Key code: " + var1.getKeyCode());
-         switch (var1.getKeyCode())
+         System.out.println("Key code: " + e.getKeyCode());
+         switch (e.getKeyCode())
          {
+            case 39: // Issue with 39 being right arrow and also something sent by the ' and " characters.
+               return;
             case 16:
                MouseWheel.shiftDown = true;
                break;
@@ -162,7 +164,7 @@ boolean capitalize = false;
 
          if(null != TextureOperation33.aClass148_3049) {
             TextureOperation29.anInt3398 = 0;
-            int var2 = var1.getKeyCode();
+            int var2 = e.getKeyCode();
             if(0 <= var2 && KEY_CODE_MAP.length > var2) {
                var2 = KEY_CODE_MAP[var2];
                // System.out.println(var2);
@@ -178,11 +180,11 @@ boolean capitalize = false;
             /**
              * Tab to reply
              */
-			if (var1.getKeyCode() == KeyEvent.VK_TAB) {
+			if (e.getKeyCode() == KeyEvent.VK_TAB) {
 				ClientCommands.ClientCommands(RSString.parse("::reply"));
 			}
 
-			if (var1.getKeyCode() == KeyEvent.VK_ESCAPE)
+			if (e.getKeyCode() == KeyEvent.VK_ESCAPE)
             {
                ClientCommands.ClientCommands(RSString.parse("::shutdowninterface"));
             }
@@ -216,14 +218,14 @@ boolean capitalize = false;
                }
             }
 
-            var3 = var1.getModifiers();
+            var3 = e.getModifiers();
             if((var3 & 10) != 0 || 85 == var2 || var2 == 10) {
-               var1.consume();
+               e.consume();
             }
          }
 
       } catch (RuntimeException var4) {
-         throw ClientErrorException.clientError(var4, "uf.keyPressed(" + (var1 != null?"{...}":"null") + ')');
+         throw ClientErrorException.clientError(var4, "uf.keyPressed(" + (e != null?"{...}":"null") + ')');
       }
    }
 

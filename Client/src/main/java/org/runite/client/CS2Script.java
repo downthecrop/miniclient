@@ -2748,6 +2748,7 @@ public final class CS2Script extends Linkable {
                                                                                 } else {
                                                                                     LinkableRSString.method736(k35, 115);
                                                                                 }
+                                                                                System.out.println("AMESSAGE MUSIC_VOLUME: " + k35);
                                                                                 AudioHandler.musicVolume = k35;
                                                                             }
                                                                             Class119.method1730(Class38.gameSignlink);

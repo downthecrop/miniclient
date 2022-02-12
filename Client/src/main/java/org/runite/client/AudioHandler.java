@@ -16,22 +16,28 @@ public final class AudioHandler {
     static SynthSound[] soundEffects = new SynthSound[50];
     static int[] soundEffectCoordinates = new int[50];
 
-    public static void musicHandler(int var1) {
+    public static void musicHandler(int trackNumber) {
         try {
-            if (-1 == var1 && !musicEffectPlaying) {
+            System.out.println("AMESSAGE NEW_MUSIC MUSIC_ID: "+trackNumber
+                    +" MUSIC_VOLUME: "+musicVolume
+            );
+            if (-1 == trackNumber && !musicEffectPlaying) {
                 GameObject.method1870();
-            } else if (var1 != -1 && (currentTrack != var1 || CSConfigCachefile.method1391(-1)) && musicVolume != 0 && !musicEffectPlaying) {
-                method2099(var1, CacheIndex.musicIndex, musicVolume);
+            } else if (trackNumber != -1 && (currentTrack != trackNumber || CSConfigCachefile.method1391(-1)) && musicVolume != 0 && !musicEffectPlaying) {
+                setMusicTrack(trackNumber, CacheIndex.musicIndex, musicVolume);
             }
-            currentTrack = var1;
+            currentTrack = trackNumber;
         } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "li.B(" + true + ',' + var1 + ')');
+            throw ClientErrorException.clientError(var3, "li.B(" + true + ',' + trackNumber + ')');
         }
     }
 
     public static void soundEffectHandler(int soundEffectVolume, int soundEffectID, int soundEffectDelay) {
         try {
-            System.out.println("Playing " + soundEffectID + " DELAY: " + soundEffectDelay + " VOLUME: " + soundEffectVolume);
+            System.out.println("AMESSAGE NEW_EFFECT EFFECT_ID: "+soundEffectID
+                    +" EFFECT_VOLUME: "+soundEffectVolume
+                    +" EFFECT_DELAY: "+soundEffectDelay
+            );
             if (soundEffectDelay != -1 && soundEffectVolume != 0 && currentSoundEffectCount < 50 && soundEffectID != -1) {
                 soundEffectVolumeArray[currentSoundEffectCount] = soundEffectVolume;
                 soundEffectIDs[currentSoundEffectCount] = soundEffectID;
@@ -134,7 +140,7 @@ public final class AudioHandler {
         }
     }
 
-    public static void method2099(int var1, CacheIndex var3, int var5) {
+    public static void setMusicTrack(int var1, CacheIndex var3, int var5) {
         try {
             Class101.aClass153_1423 = var3;
             Class132.anInt1741 = 0;
