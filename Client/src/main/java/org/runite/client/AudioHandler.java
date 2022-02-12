@@ -32,14 +32,14 @@ public final class AudioHandler {
         }
     }
 
-    public static void soundEffectHandler(int soundEffectVolume, int soundEffectID, int soundEffectDelay) {
+    public static void soundEffectHandler(int csoundEffectVolume, int soundEffectID, int soundEffectDelay) {
         try {
             System.out.println("AMESSAGE NEW_EFFECT EFFECT_ID: "+soundEffectID
-                    +" EFFECT_VOLUME: "+soundEffectVolume
+                    +" EFFECT_VOLUME: "+((csoundEffectVolume*(soundEffectVolume/127f)))
                     +" EFFECT_DELAY: "+soundEffectDelay
             );
-            if (soundEffectDelay != -1 && soundEffectVolume != 0 && currentSoundEffectCount < 50 && soundEffectID != -1) {
-                soundEffectVolumeArray[currentSoundEffectCount] = soundEffectVolume;
+            if (soundEffectDelay != -1 && csoundEffectVolume != 0 && currentSoundEffectCount < 50 && soundEffectID != -1) {
+                soundEffectVolumeArray[currentSoundEffectCount] = csoundEffectVolume;
                 soundEffectIDs[currentSoundEffectCount] = soundEffectID;
                 soundEffectDelayArray[currentSoundEffectCount] = soundEffectDelay;
                 soundEffects[currentSoundEffectCount] = null;
@@ -48,7 +48,7 @@ public final class AudioHandler {
             }
 
         } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "ca.C(" + soundEffectVolume + ',' + soundEffectID + ',' + soundEffectDelay + ',' + -799 + ')');
+            throw ClientErrorException.clientError(var5, "ca.C(" + csoundEffectVolume + ',' + soundEffectID + ',' + soundEffectDelay + ',' + -799 + ')');
         }
     }
 

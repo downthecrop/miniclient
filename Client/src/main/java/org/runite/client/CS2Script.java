@@ -2727,6 +2727,7 @@ public final class CS2Script extends Linkable {
                                                                                 j35 = 0;
                                                                             if (j35 > 127)
                                                                                 j35 = 127;
+                                                                            System.out.println("AMESSAGE EFFECT_VOLUME: " + j35);
                                                                             AudioHandler.soundEffectVolume = j35;
                                                                             Class119.method1730(Class38.gameSignlink);
                                                                             aBoolean2705 = false;
