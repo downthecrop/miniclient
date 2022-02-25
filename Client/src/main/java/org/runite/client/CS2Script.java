@@ -2334,10 +2334,13 @@ public final class CS2Script extends Linkable {
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5307) {
+                                                                        // Disable HD Mode
+                                                                        /*
                                                                         int k32 = ItemDefinition.intsStack[--iStackCounter];
                                                                         if (k32 < 0 || k32 > 2)
                                                                             k32 = 0;
                                                                         GameObject.graphicsSettings(false, k32, -1, -1);
+                                                                         */
                                                                         continue;
                                                                     }
                                                                     if (5308 == opcode) {
